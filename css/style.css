@@ -26,7 +26,10 @@
 
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
 
 body {
   margin: 0;
@@ -36,6 +39,8 @@ body {
   font-size: 17px;
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 img { max-width: 100%; display: block; }
@@ -49,16 +54,32 @@ a { color: inherit; }
   padding: 0 24px;
 }
 
-h1, h2, h3, h4 {
-  font-family: var(--font-display);
-  line-height: 1.05;
-  margin: 0 0 0.5em;
-  letter-spacing: -0.01em;
+@media (max-width: 480px) {
+  .container {
+    padding: 0 16px;
+  }
 }
 
-h1 { font-size: clamp(2.6rem, 6vw, 4.6rem); }
-h2 { font-size: clamp(2rem, 4.2vw, 3rem); }
-h3 { font-size: 1.5rem; }
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  line-height: 1.15;
+  margin: 0 0 0.5em;
+  letter-spacing: -0.01em;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: none;
+  -webkit-hyphens: none;
+}
+
+h1 { font-size: clamp(1.8rem, 5vw, 4.2rem); }
+h2 { font-size: clamp(1.45rem, 3.5vw, 2.8rem); }
+h3 { font-size: clamp(1.15rem, 2.4vw, 1.5rem); }
+
+@media (max-width: 600px) {
+  h1 { font-size: 1.6rem; }
+  h2 { font-size: 1.3rem; }
+  h3 { font-size: 1.1rem; }
+}
 
 p { margin: 0 0 1em; }
 
@@ -238,7 +259,13 @@ p { margin: 0 0 1em; }
 }
 
 @media (max-width: 860px) {
-  .hero-grid { grid-template-columns: 1fr; }
+  .hero { padding: 60px 0 45px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+  .hero-visual { max-width: 260px; margin: 10px auto 0; }
+}
+
+@media (max-width: 540px) {
+  .hero-actions .btn { width: 100%; justify-content: center; }
 }
 
 .hero h1 {
@@ -331,6 +358,10 @@ p { margin: 0 0 1em; }
 
 section { padding: 76px 0; }
 
+@media (max-width: 780px) {
+  section { padding: 52px 0; }
+}
+
 .section-head {
   max-width: 62ch;
   margin-bottom: 44px;
@@ -342,8 +373,8 @@ section { padding: 76px 0; }
 
 .section-head-wide h2 {
   max-width: 100%;
-  font-size: clamp(2.2rem, 4.5vw, 3.4rem);
-  line-height: 1.1;
+  font-size: clamp(1.65rem, 4vw, 3rem);
+  line-height: 1.15;
   margin-bottom: 22px;
 }
 
@@ -360,7 +391,7 @@ section { padding: 76px 0; }
 
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
   gap: 24px;
 }
 
@@ -448,7 +479,7 @@ section { padding: 76px 0; }
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
   gap: 20px;
 }
 
